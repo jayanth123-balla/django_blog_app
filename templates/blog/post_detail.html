@@ -1,0 +1,38 @@
+<!DOCTYPE html> 
+{%extends 'blog/base.html'%} 
+{%block title %}{{post.title}}{%endblock%} 
+{%block content%} 
+<h1>{{post.title}}</h1> 
+<p id='date'>Published on {{post.publish}} by {{post.author|title}}</p> 
+{{post.body|linebreaks}} 
+<a href="/{{post.id}}/share" class='btn btn-lg btn-primary' target="_blank">Share Post By Email</a>
+<h2>Similar Posts</h2> 
+{%if similar_posts%} 
+{%for post in similar_posts%} 
+<h3> <a href="{{post.get_absolute_url}}">{{post.title}}</a> </h3> 
+{%endfor%} 
+{%else%} 
+<p>No Similar Posts yet</p> 
+{%endif%} 
+{% with comments.count as comments_count %} 
+<h2>{{comments_count}} Comment{{comments_count|pluralize}}</h2> 
+{% endwith%} 
+{%if comments %} 
+{%for comment in comments %} 
+<p id='ch'> comment {{forloop.counter}} by {{comment.name}} on{{comment.created}}</p> 
+<div class="cb">{{comment.body|linebreaks}}</div> 
+<hr> 
+{%endfor%} 
+{%else%} 
+<p>There are NO Comments Yet !!!</p> 
+{%endif%} 
+{%if csubmit %} 
+<h2>Your Comment Added Succefully</h2> 
+{%else%} 
+<form method="post"> 
+{{form.as_p}} 
+{%csrf_token%} 
+<input type="submit" name="" value="Submit Comment"> 
+</form> 
+{%endif%} 
+{%endblock%}

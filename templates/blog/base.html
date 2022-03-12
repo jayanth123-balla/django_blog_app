@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{%load static%}
+{%load blog_tags %} 
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="blog.css"> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"crossorigin="anonymous">
+<title>{%block title %}{%endblock%}</title>
+</head>
+<style>
+.content{ 
+    float:left; 
+    width: 60%; 
+    padding:0px 0 0 30px; 
+} 
+.sidebar{ 
+    float:right; 
+    width:30%; 
+    padding:10px; 
+    background: green; 
+    height: 100%; 
+} 
+h1{ 
+   text-align: center; 
+   border-bottom: 1px solid #bbb; 
+    padding: 0 0 10px 0; 
+} 
+#date{ 
+    color:yellow; 
+    font-size:12px; 
+    font-style: italic; 
+} 
+body{ 
+    background: red; 
+    color:white; 
+} 
+</style>
+<body>
+<div class="content">
+{%block content%}{%endblock%}
+</div>
+<div class="sidebar">
+<h2>JAYANTH's BLOG</h2>
+<p>The total number of published posts upto today: {%total_posts%}</p> 
+<h3>Latest Posts:</h3>{% show_latest_posts 3 %}
+</div>
+{% include "blog/navbar.html" %}
+</body>
+</html>
